@@ -34,7 +34,7 @@ module ``about branching`` =
             else
                 "no problem here"
 
-        AssertEquality result  "no problem here"
+        AssertEquality result "no problem here"
 
     [<Koan>]
     let BranchingWithAPatternMatch() =

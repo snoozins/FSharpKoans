@@ -43,7 +43,7 @@ module ``about strings`` =
     let FormattingAnything() =
         let message = sprintf "Formatting other types is as easy as: %A" (1, 2, 3)
 
-        AssertEquality message "Formatting other types is as easy as: (1, 2, 3)"
+        AssertEquality message "Formatting other types is as easy as: (1, 2, 3)" 
 
     (* NOTE: For all the %formatters that you can use with string formatting 
              see: http://msdn.microsoft.com/en-us/library/ee370560.aspx *)
@@ -91,10 +91,9 @@ module ``about strings`` =
         (* It's time to apply what you've learned so far. Fill in the function below to
            make the asserts pass *)
         let getFunFacts x =
-            let double x = x*2
-            let triple x = x*3
-            sprintf "%d doubled is %d, \
-            and %d tripled is %d!" x (double x) x (triple x)
+            let doubleX x = x*2
+            let tripleX x = x*3
+            sprintf "%d doubled is %d, and %d tripled is %d!" x (doubleX x) x (tripleX x)
 
         let funFactsAboutThree = getFunFacts 3
         let funFactsAboutSix = getFunFacts 6

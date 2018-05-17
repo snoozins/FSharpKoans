@@ -1,5 +1,6 @@
 ﻿namespace FSharpKoans
 open FSharpKoans.Core
+open NUnit.Framework
 
 //---------------------------------------------------------------
 // Apply Your Knowledge!
@@ -58,8 +59,61 @@ module ``about the stock example`` =
     // tests for yourself along the way. You can also try 
     // using the F# Interactive window to check your progress.
 
+    // [<Koan>]
+    let Testing1() = 
+        let splitCommas (x:string) =
+            x.Split([|','|])
+        let difference x y = 
+            y - x
+        let stripHeaderRow = stockData.Tail        
+        let firstRowString = stripHeaderRow.Head
+        let firstRow = splitCommas firstRowString
+        let openDouble = System.Double.Parse firstRow.[1]
+        // AssertEquality 32.4 openDouble
+        let closeDouble = System.Double.Parse firstRow.[6]
+        // AssertEquality 32.26 closeDouble
+        let differenceDouble = difference openDouble closeDouble
+        AssertEquality (abs -0.14) (abs differenceDouble)
+        
+    // [<Koan>] 
+    let Testing2() = 
+        let splitCommas (x:string) =
+            x.Split([|','|])
+        let difference x y = 
+            y - x  
+        let dayDifference (x:string[]) = 
+            let day = x.[0]
+            let openPrice = System.Double.Parse x.[1]
+            let closePrice = System.Double.Parse x.[6]
+            let dailyDifference = difference openPrice closePrice
+            (dailyDifference, day)
+        let result = 
+            List.map splitCommas stockData.Tail
+            |> List.map dayDifference
+            |> Seq.max 
+
+          
+
+        AssertEquality "ab" (snd result)
+        // let something = stockData.Tail 
+        //     |>
+        //     |> splitCommas         
+
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+        let splitCommas (x:string) =
+            x.Split([|','|])
+        let difference x y = 
+            y - x  
+        let dayDifference (x:string[]) = 
+            let day = x.[0]
+            let openPrice = System.Double.Parse x.[1]
+            let closePrice = System.Double.Parse x.[6]
+            let dailyDifference = difference openPrice closePrice
+            (dailyDifference, day)
+        let result = 
+            List.map (splitCommas >> dayDifference) stockData.Tail
+            |> Seq.max 
+            |> snd 
         
         AssertEquality "2012-03-13" result
